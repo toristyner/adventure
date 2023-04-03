@@ -37,7 +37,7 @@
 		map?.setZoom(zoom)
 	}
 
-	const myProp = 'tori'
+
 	// $: {
 	// 	if (!loading) {
 	// 		data.map(d => {
@@ -51,17 +51,21 @@
 	// 		})
 	// 	}
 	// }
-
 </script>
 
-<div id="map" />
-<div class="map__layers">
-	<slot myProp="tori"></slot>
+<div id="map">
+	<slot name="layers" map={map}></slot>
 </div>
 
 <style>
 	#map {
 		width: 100%;
 		height: 100%;
+	}
+
+	.map__layers {
+		display: flex;
+		flex-direction: column;
+		padding: 1.2rem;
 	}
 </style>
