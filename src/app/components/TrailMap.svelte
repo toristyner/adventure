@@ -4,6 +4,11 @@
 	import trailStore from '../stores/trails.js'
 	import {GoogleMap, GoogleMapData } from '../../packages/svelte-google-map'
 
+	$: trails = Object.values($trailStore).map(t => ({
+		...t,
+		visible: $selectedStore.includes(t.id)
+	}))
+
 	$: centeredTrailId = $selectedStore[$selectedStore.length] || TrailEnum.AT;
 	$: centeredTrail = $trailStore[centeredTrailId]
 
@@ -18,12 +23,11 @@
 		zoom={centeredTrail.overview.zoom}
 	>
 		<div slot="layers" let:map={map}>
-			{#each $selectedStore as trailId}
-				{#each $trailStore[trailId].data as layer}
-					<GoogleMapData url={layer.url} type="geoJson" map={map} />
+			{#each trails as trail }
+				{#each trail.data as layer}
+					<GoogleMapData url={layer.url} type="geoJson" map={map} visible={trail.visible} />					
 				{/each}
 			{/each}
-			
 		</div>
 	</GoogleMap>
 </div>
