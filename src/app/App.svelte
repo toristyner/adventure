@@ -2,6 +2,7 @@
 	import Header from './components/Header.svelte';
 	import TrailList from './components/TrailList.svelte';
 	import TrailMap from './components/TrailMap.svelte';
+	import TrailSection from './components/TrailSection.svelte'
 
 </script>
 
@@ -10,6 +11,7 @@
 	<div class="app__content">
 		<TrailList />
 		<TrailMap />
+		<TrailSection />
 	</div>
 </div>
 

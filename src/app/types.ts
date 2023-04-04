@@ -18,3 +18,21 @@ export interface Trail {
     zoom: number
   }
 }
+
+export enum SectionStatus {
+  NotStarted='Not Started',
+  Planned='Planned',
+  InProgress='In Progress',
+  Complete='Complete'
+}
+
+export interface Section {
+  id: string,
+  trailId: TrailEnum,
+  name?: string,
+  start?: any,
+  end?: any,
+  elevationDelta?: number,
+  distanceDelta?: number,
+  status: SectionStatus,
+}

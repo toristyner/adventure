@@ -1,36 +1,50 @@
 <script lang="ts">
-	import { onDestroy, onMount } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
   
   export let map: google.maps.Map;
-  export let type: 'geoJson';
-  export let url: string;
+  export let type: 'geoJson' | 'line';
+  export let url: string | undefined;
   export let visible: boolean;
 
-  export const fillColor = 'black';
-  export const strokeColor = fillColor || 'black';
-  export const strokeWeight = 2;
+  export let fillColor = 'purple';
+  export let strokeColor = fillColor || 'purple';
+  export let strokeWeight = 4;
 
   let data: google.maps.Data;
+  let loading = true;
 
-  onMount(() => {
-    if (type === 'geoJson') {
-      loadGeoJson()
+  const dispatch = createEventDispatcher()
+
+  onMount(async () => {
+    if (type === 'geoJson' && url !== undefined) {
+      await loadGeoJson(url)
+      loading = false
     }
   })
 
-  const loadGeoJson = () => {
+  $: dataStyle = {
+    fillColor,
+    strokeColor,
+    strokeWeight: visible ? strokeWeight : 0
+  }
+
+  const loadGeoJson = async (src: string) => {
     data = new google.maps.Data({map})
-    data.loadGeoJson(url)
-    data.setStyle({
-      fillColor,
-      strokeColor,
-      strokeWeight: visible ? strokeWeight : 0
-    })
+    await data.loadGeoJson(src)
+    data.setStyle(dataStyle)
+    data.addListener('click', onClickLayer)
   }
 
   $: {
-    data?.setStyle({
-      strokeWeight: visible ? strokeWeight : 0
-    })
+    data?.setStyle(dataStyle)
   }
+
+  const onClickLayer = (e: google.maps.Data.MouseEvent) => {
+    dispatch('google-map-data-click', e)
+  }
+
+  // const onMouseOverLayer = (e: google.maps.Data.MouseEvent) => {
+  //   dispatch('google-map-data-mouseover', e)
+  // }
+
 </script>

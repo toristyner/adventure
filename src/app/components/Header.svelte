@@ -12,6 +12,7 @@
 		justify-content: flex-start;
 		align-items: center;
 		padding: 0.8rem 1.2rem;
+		border-bottom: 1px solid #f8f8f8;
 	}
 
 	.header__title {
