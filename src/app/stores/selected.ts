@@ -1,5 +1,5 @@
 import { type Writable, writable } from "svelte/store";
-import type { TrailEnum } from "../types";
+import { TrailEnum } from "../types";
 
 interface SelectedStore extends Writable<TrailEnum[]> {
   clear: () => void
@@ -9,7 +9,7 @@ interface SelectedStore extends Writable<TrailEnum[]> {
 
 function createSelectedStore(): SelectedStore {
 
-  const store = writable<TrailEnum[]>([])
+  const store = writable<TrailEnum[]>([TrailEnum.AT])
   const { subscribe, set, update } = store
 
   return {

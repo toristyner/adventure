@@ -2,14 +2,8 @@
 	import { onMount } from 'svelte';
 	import { Loader } from "@googlemaps/js-api-loader"
 
-	// type MapData = {
-	// 	visible: boolean;
-	// 	url: string
-	// }
-
 	export let center: google.maps.LatLngLiteral
 	export let zoom: number
-	// export let data: MapData[]
 
 	const loader = new Loader({
 		apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -37,35 +31,17 @@
 		map?.setZoom(zoom)
 	}
 
-
-	// $: {
-	// 	if (!loading) {
-	// 		data.map(d => {
-	// 			if (!geoJsonLayers[d.url]) {
-	// 				const layerData = new google.maps.Data()
-	// 				layerData.loadGeoJson(d.url)
-	// 				geoJsonLayers[d.url] = layerData
-	// 			}
-
-	// 			console.log('Map - data - ', d)
-	// 		})
-	// 	}
-	// }
 </script>
 
 <div id="map">
-	<slot name="layers" map={map}></slot>
+	{#if !loading}
+		<slot name="layers" map={map}></slot>
+	{/if}
 </div>
 
 <style>
 	#map {
 		width: 100%;
 		height: 100%;
-	}
-
-	.map__layers {
-		display: flex;
-		flex-direction: column;
-		padding: 1.2rem;
 	}
 </style>

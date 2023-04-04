@@ -2,27 +2,30 @@
 	import { TrailEnum } from '../types';
 	import selectedStore from '../stores/selected.js';
 	import trailStore from '../stores/trails.js'
-	import Map from './Map.svelte'
-	import MapLayer from './MapLayer.svelte';
+	import {GoogleMap, GoogleMapData } from '../../packages/svelte-google-map'
 
-	$: centeredTrailId = $selectedStore.pop() || TrailEnum.AT;
+	$: centeredTrailId = $selectedStore[$selectedStore.length] || TrailEnum.AT;
 	$: centeredTrail = $trailStore[centeredTrailId]
 
-	$: layers = Object.values($trailStore)
-
+	$: {
+		console.log($selectedStore)
+	}
 </script>
 
 <div class="trail-map">
-	<Map
+	<GoogleMap
 		center={centeredTrail.overview.center}
 		zoom={centeredTrail.overview.zoom}
 	>
 		<div slot="layers" let:map={map}>
-			{#each layers as layer }
-				<MapLayer {map} {layer} />
+			{#each $selectedStore as trailId}
+				{#each $trailStore[trailId].data as layer}
+					<GoogleMapData url={layer.url} type="geoJson" map={map} />
+				{/each}
 			{/each}
+			
 		</div>
-	</Map>
+	</GoogleMap>
 </div>
 
 <style>

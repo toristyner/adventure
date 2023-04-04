@@ -1,13 +1,15 @@
+import type { GoogleMapData } from "../packages/svelte-google-map"
+
 export enum TrailEnum {
   AT='at',
-  AZT='azt',
+  // AZT='azt',
   PCT='pct',
 }
 
 export interface Trail {
   id: TrailEnum,
   name: string,
-  geoJson: string,
+  data: GoogleMapData[],
   overview: {
     center: {
       lat: number,
@@ -16,4 +18,3 @@ export interface Trail {
     zoom: number
   }
 }
-  
