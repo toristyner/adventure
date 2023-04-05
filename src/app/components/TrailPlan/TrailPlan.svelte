@@ -10,9 +10,10 @@
 </script>
 
 <div class="trailPlan">
-  
   <div class="trailPlan__header">
-    <label for="trailPlan__label">Select a Trail</label>
+    <label
+      class="trailPlan__label"
+      for="trailPlan__label">Plan your hike</label>
     <select
       name="activeTrail"
       class="trailPlan__select"
@@ -23,14 +24,13 @@
     </select>
   </div>
 
-  <SegmentList segments={trail.segments} />
-
-
+  <SegmentList segmentIds={trail.segments} />
 </div>
 
 <style>
   .trailPlan {
     padding: 1.2rem;
+    width: 30rem;
   }
 
   .trailPlan__header {
@@ -39,10 +39,17 @@
   }
   
   .trailPlan__label {
-    
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
   }
 
   .trailPlan__select {
-
+    margin-bottom: 0.8rem;
+    background-color: #7a8a7a;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    
   }
 </style>

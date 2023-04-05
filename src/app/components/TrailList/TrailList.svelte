@@ -21,9 +21,9 @@
 
 </script>
 
-<div class="nav">
-	<h1 class="nav__header">Trails</h1>
-	<ul class="nav__list">
+<div class="trailList">
+	<h1 class="trailList__header">Trails</h1>
+	<ul class="trailList__list">
     {#each trails as trail (trail.id)}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <li
@@ -31,44 +31,66 @@
       class:active={$activeTrailId === trail.id}
     >
       <input
-        class="nav__listitem--input"
+        class="trailList__input"
         type=checkbox bind:group={selected}
         value={trail.id}
         name={trail.id}
         on:change={handleSelect}
       >
-      <label for={trail.id} class="nav__listitem--label">{trail.name}</label>
+      <label for={trail.id} class="trailList__label">{trail.name}</label>
     </li>
     {/each}
 	</ul>
 </div>
 
 <style>
-	.nav {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.nav__header {
-		font-size: 1.6rem;
+	.trailList {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20rem;
+    height: 8rem;
+    position: absolute;
+    z-index: 999999;
+    background: white;
+    border-radius: 0.8rem;
     margin: 1.2rem;
+    overflow: hidden;
+    padding: 1.2rem;
+    bottom: 0;
+    left: 0;
 	}
 
-	.nav__list {
+	.trailList__header {
+		font-size: 1.6rem;
+    margin: 0.4rem 0;
+	}
+
+	.trailList__list {
     list-style: none;
     display: flex;
+    flex: 1;
     flex-direction: column;
     margin: 0;
     padding: 0;
+    width: 100%;
 	}
 
-  .nav__listitem--label {
-    padding: 0.4rem 1.2rem;
+  .trailList__label {
     font-size: 1.4rem;
   }
-
+  
+  ul {
+    display: flex;
+    flex: 1;
+  }
+  li {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0.4rem;
+  }
   li.active {
-    background-color: green;
+    background-color: #7a8a7a;
   }
 </style>

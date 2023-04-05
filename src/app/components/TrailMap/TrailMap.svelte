@@ -37,7 +37,7 @@
 	}
 
 	const onClickTrail = (trailId: TrailEnum, {detail}: GoogleMapDataMouseEvent) => {
-		console.log('on click trail')
+		console.log('on click trail', trailId, detail)
 	}
 
 	const onClickMarker = ({ detail }: GoogleMapMouseEvent) => {

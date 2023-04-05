@@ -35,7 +35,7 @@ export interface TrailSegment {
 export interface TrailMarker {
   id: string;
   label: string;
-  type?: string;
+  type?: MarkerType;
   trailId: TrailEnum;
   segmentId?: string;
   position: google.maps.LatLng
@@ -46,4 +46,16 @@ export enum SegmentStatus {
   Planned='Planned',
   InProgress='In Progress',
   Complete='Complete'
+}
+
+export enum MarkerType {
+  Camp='Campsite',
+  Default='X',
+  Parking='Parking',
+  ReSupply='ReSupply',
+  Shelter='Shelter',
+  TrailStart='Start',
+  TrailEnd='End',
+  ViewPoint='View Point',
+  Water='Water',
 }

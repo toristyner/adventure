@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@googlemaps/js-api-loader": "^1.15.1"
+		"@googlemaps/js-api-loader": "^1.15.1",
+		"uuid": "^9.0.0"
 	}
 }
