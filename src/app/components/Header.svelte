@@ -2,7 +2,7 @@
 </script>
 
 <div class="header">
-	<h1 class="header__title">Adventure</h1>
+	<h1 class="header__title">Section Hiker</h1>
 </div>
 
 <style>

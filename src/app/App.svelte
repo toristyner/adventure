@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Header from './components/Header.svelte';
-	import TrailList from './components/TrailList.svelte';
-	import TrailMap from './components/TrailMap.svelte';
-	import TrailSection from './components/TrailSection.svelte'
+	import TrailList from './components/TrailList/TrailList.svelte';
+	import TrailMap from './components/TrailMap/TrailMap.svelte';
+	import AdventurePlan from './components/TrailPlan/TrailPlan.svelte'
 
 </script>
 
@@ -11,7 +11,7 @@
 	<div class="app__content">
 		<TrailList />
 		<TrailMap />
-		<TrailSection />
+		<AdventurePlan />
 	</div>
 </div>
 

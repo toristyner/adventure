@@ -1,15 +1,22 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-
+	import { createEventDispatcher, onMount } from "svelte";
 
   export let map: google.maps.Map;
   export let position: google.maps.LatLng;
-  export let label: google.maps.MarkerLabel
+  export let label: string;
 
   let marker: google.maps.Marker
 
+  const dispatch = createEventDispatcher()
+
+  const onMarkerClick = (e: google.maps.MapMouseEvent) => {
+    dispatch('google-map-marker-click', e)
+  }
+
   onMount(() => {
-    marker = new google.maps.Marker({ position, map, label })
+    marker = new google.maps.Marker({ position, map })
+    marker.setLabel(label)
+    marker.addListener('click', onMarkerClick)
   })
 
   $: {

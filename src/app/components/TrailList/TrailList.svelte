@@ -1,10 +1,12 @@
 <script lang="ts">
-  import trailStore from "../stores/trails.js";
-  import selectedStore from "../stores/selected.js";
-	import type { TrailEnum } from "../types.js";
+  import trailStore from "../../stores/trails.js";
+  import selectedStore from "../../stores/selected.js";
+	import type { TrailEnum } from "../../types.js";
+	import activeTrailId from "../../stores/activeTrail.js";
   
   let selected: string[];
 
+  activeTrailId
   selectedStore.subscribe(s => {
     selected = s
   })
@@ -23,18 +25,20 @@
 	<h1 class="nav__header">Trails</h1>
 	<ul class="nav__list">
     {#each trails as trail (trail.id)}
-    <label
-      class="nav__listitem--label"
-      class:active={selected.includes(trail.id)}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <li
+      on:click={() => activeTrailId.set(trail.id)}
+      class:active={$activeTrailId === trail.id}
     >
       <input
         class="nav__listitem--input"
         type=checkbox bind:group={selected}
         value={trail.id}
+        name={trail.id}
         on:change={handleSelect}
       >
-      {trail.name}
-    </label>
+      <label for={trail.id} class="nav__listitem--label">{trail.name}</label>
+    </li>
     {/each}
 	</ul>
 </div>
@@ -59,16 +63,12 @@
     padding: 0;
 	}
 
-  .nav__listitem--input {
-    display: none;
-  }
-
   .nav__listitem--label {
     padding: 0.4rem 1.2rem;
     font-size: 1.4rem;
   }
 
-  .nav__listitem--label.active {
-    background-color: #537e5d;
+  li.active {
+    background-color: green;
   }
 </style>

@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 	import { Loader } from "@googlemaps/js-api-loader"
 
 	export let center: google.maps.LatLngLiteral
 	export let zoom: number
+
+	const dispatch = createEventDispatcher()
 
 	const loader = new Loader({
 		apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -12,7 +14,6 @@
 
 	let map: google.maps.Map;
 	let loading = true;
-	// let geoJsonLayers: any = {}
 
 	onMount(async () => {
 		await loader.load()
@@ -20,8 +21,13 @@
 			center,
 			zoom
 		});
+		map.addListener('click', onMapClick)
 		loading = false
 	});
+
+	const onMapClick = (e: google.maps.MapMouseEvent) => {
+		dispatch('google-map-click', e)
+	}
 
 	$: {
 		map?.panTo(center)

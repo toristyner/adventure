@@ -40,11 +40,9 @@
   }
 
   const onClickLayer = (e: google.maps.Data.MouseEvent) => {
+    e.stop()
     dispatch('google-map-data-click', e)
   }
-
-  // const onMouseOverLayer = (e: google.maps.Data.MouseEvent) => {
-  //   dispatch('google-map-data-mouseover', e)
-  // }
-
 </script>
+
+<slot name="segments" data={data}></slot>

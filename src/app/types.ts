@@ -6,10 +6,16 @@ export enum TrailEnum {
   PCT='pct',
 }
 
+export enum HikingDirection {
+  NOBO='North Bound (NOBO)',
+  SOBO='South Bound (SOBO)'
+}
 export interface Trail {
   id: TrailEnum,
   name: string,
   data: GoogleMapData[],
+  segments: string[],
+  markers: string[],
   overview: {
     center: {
       lat: number,
@@ -19,20 +25,25 @@ export interface Trail {
   }
 }
 
-export enum SectionStatus {
+export interface TrailSegment {
+  id: string;
+  name: string;
+  markers: string[];
+  hikingDirection?: HikingDirection;
+  status: SegmentStatus
+}
+export interface TrailMarker {
+  id: string;
+  label: string;
+  type?: string;
+  trailId: TrailEnum;
+  segmentId?: string;
+  position: google.maps.LatLng
+}
+
+export enum SegmentStatus {
   NotStarted='Not Started',
   Planned='Planned',
   InProgress='In Progress',
   Complete='Complete'
-}
-
-export interface Section {
-  id: string,
-  trailId: TrailEnum,
-  name?: string,
-  start?: any,
-  end?: any,
-  elevationDelta?: number,
-  distanceDelta?: number,
-  status: SectionStatus,
 }
