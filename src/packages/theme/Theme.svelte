@@ -1,4 +1,5 @@
-<div style="
+<div
+	style="
   --ui-theme-white: #fff;
   --ui-theme-grey-200: #F8F8F8;
   --ui-theme-grey-300: #EEEEEE;
@@ -34,6 +35,7 @@
 
   height: 100%;
   width: 100%;
-">
-  <slot></slot>
+"
+>
+	<slot />
 </div>

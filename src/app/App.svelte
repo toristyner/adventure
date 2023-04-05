@@ -3,8 +3,7 @@
 	import Header from './components/Header.svelte';
 	import TrailList from './components/TrailList/TrailList.svelte';
 	import TrailMap from './components/TrailMap/TrailMap.svelte';
-	import AdventurePlan from './components/TrailPlan/TrailPlan.svelte'
-
+	import AdventurePlan from './components/TrailPlan/TrailPlan.svelte';
 </script>
 
 <Theme>

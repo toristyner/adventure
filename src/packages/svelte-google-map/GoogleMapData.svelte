@@ -1,48 +1,48 @@
 <script lang="ts">
-	import { createEventDispatcher, onMount } from "svelte";
-  
-  export let map: google.maps.Map;
-  export let type: 'geoJson' | 'line';
-  export let url: string | undefined;
-  export let visible: boolean;
+	import { createEventDispatcher, onMount } from 'svelte';
 
-  export let fillColor = 'purple';
-  export let strokeColor = fillColor || 'purple';
-  export let strokeWeight = 4;
+	export let map: google.maps.Map;
+	export let type: 'geoJson' | 'line';
+	export let url: string | undefined;
+	export let visible: boolean;
 
-  let data: google.maps.Data;
-  let loading = true;
+	export let fillColor = 'purple';
+	export let strokeColor = fillColor || 'purple';
+	export let strokeWeight = 4;
 
-  const dispatch = createEventDispatcher()
+	let data: google.maps.Data;
+	let loading = true;
 
-  onMount(async () => {
-    if (type === 'geoJson' && url !== undefined) {
-      await loadGeoJson(url)
-      loading = false
-    }
-  })
+	const dispatch = createEventDispatcher();
 
-  $: dataStyle = {
-    fillColor,
-    strokeColor,
-    strokeWeight: visible ? strokeWeight : 0
-  }
+	onMount(async () => {
+		if (type === 'geoJson' && url !== undefined) {
+			await loadGeoJson(url);
+			loading = false;
+		}
+	});
 
-  const loadGeoJson = async (src: string) => {
-    data = new google.maps.Data({map})
-    await data.loadGeoJson(src)
-    data.setStyle(dataStyle)
-    data.addListener('click', onClickLayer)
-  }
+	$: dataStyle = {
+		fillColor,
+		strokeColor,
+		strokeWeight: visible ? strokeWeight : 0
+	};
 
-  $: {
-    data?.setStyle(dataStyle)
-  }
+	const loadGeoJson = async (src: string) => {
+		data = new google.maps.Data({ map });
+		await data.loadGeoJson(src);
+		data.setStyle(dataStyle);
+		data.addListener('click', onClickLayer);
+	};
 
-  const onClickLayer = (e: google.maps.Data.MouseEvent) => {
-    e.stop()
-    dispatch('google-map-data-click', e)
-  }
+	$: {
+		data?.setStyle(dataStyle);
+	}
+
+	const onClickLayer = (e: google.maps.Data.MouseEvent) => {
+		e.stop();
+		dispatch('google-map-data-click', e);
+	};
 </script>
 
-<slot name="segments" data={data}></slot>
+<slot name="segments" {data} />
