@@ -1,10 +1,34 @@
 import { type Writable, writable } from "svelte/store";
-import type { TrailMarker } from "../types";
+import { MarkerType, TrailEnum, type TrailMarker } from "../types";
 
 interface Markers {
   [index: string]: TrailMarker
 }
 
+const initial = {
+  'marker-a': {
+    id: 'marker-a',
+    label: 'Start',
+    type: MarkerType.TrailStart,
+    trailId: TrailEnum.AT,
+    segmentId: 'segment-a',
+    position: {
+      lat: 41.2022292,
+      lng: -74.4006157
+    }
+  },
+  'marker-b': {
+    id: 'marker-b',
+    label: 'End',
+    type: MarkerType.TrailEnd,
+    trailId: TrailEnum.AT,
+    segmentId: 'segment-a',
+    position: {
+      lat: 41.2706951,
+      lng: -74.0922502
+    }
+  }
+}
 interface MarkerStore extends Writable<Markers> {
   updateMarker: (marker: TrailMarker) => void,
   addMarker: (marker: TrailMarker) => void,
@@ -13,7 +37,7 @@ interface MarkerStore extends Writable<Markers> {
 
 function createMarkerStore(): MarkerStore {
 
-  const store = writable<Markers>({})
+  const store = writable<Markers>(initial)
   const { subscribe, set, update } = store
 
   return {

@@ -18,7 +18,6 @@
       id: `${$activeTrailId}-${getId()}`,
       name: `My Segment`,
       status: SegmentStatus.Planned,
-      markers: []
     }
 
     segmentStore.addSegment(segment)

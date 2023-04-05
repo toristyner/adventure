@@ -13,8 +13,8 @@ const trails: AllTrails = {
       type: 'geoJson',
       url: 'https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/Appalachian_National_Scenic_Trail/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson'
     }],
-    segments: [],
-    markers: [],
+    segments: ['segment-a'],
+    markers: ['marker-a', 'marker-b'],
     overview: {
       center: { lat: 39.7972686, lng: -77.5403369 },
       zoom: 6

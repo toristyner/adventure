@@ -28,7 +28,6 @@ export interface Trail {
 export interface TrailSegment {
   id: string;
   name: string;
-  markers: string[];
   hikingDirection?: HikingDirection;
   status: SegmentStatus
 }

@@ -1,5 +1,7 @@
 import { type Writable, writable } from "svelte/store";
 import type { TrailSegment } from "../types";
+import { HikingDirection } from "../types";
+import { SegmentStatus } from "../types";
 
 interface Segments {
   [index: string]: TrailSegment
@@ -13,9 +15,18 @@ interface SegmentStore extends Writable<Segments> {
   removeSegmentMarker: (segmentId: string, markerId: string) => void
 }
 
+const initialStore = {
+  'segment-a': {
+    id: 'segment-a',
+    name: 'Segment A',
+    hikingDirection: HikingDirection.NOBO,
+    status: SegmentStatus.Planned
+  }
+}
+
 function createSegmentStore(): SegmentStore {
 
-  const store = writable<Segments>({})
+  const store = writable<Segments>(initialStore)
   const { subscribe, set, update } = store
 
   return {

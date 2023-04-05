@@ -1,8 +1,16 @@
 <script lang="ts">
-	import { MarkerType, type TrailMarker } from "../../types";
+	import markerStore from "../../stores/markers";
+import { MarkerType, type TrailMarker } from "../../types";
 	import MarkerIcon from "./MarkerIcon.svelte";
   
   export let marker: TrailMarker;
+
+  const onChangeMarker = (key: keyof TrailMarker, value: any) => {
+    markerStore.updateMarker({
+      ...marker,
+      [key]: value
+    })
+  }
 </script>
 
 <li class="markerListItem">
@@ -15,7 +23,7 @@
         class='name'
       />
     </div>
-    <select value={marker.type}>
+    <select bind:value={marker.type} on:change={(e) => onChangeMarker('type', e.target.value)}>
       {#each Object.values(MarkerType) as markerType}
         <option value={markerType}>{markerType}</option>
       {/each}
@@ -23,8 +31,8 @@
   </div>
 
   <div class="position">
-    <div class="position--latLng"><b>Lat: </b> <i>{marker.position.lat().toString()}</i></div>
-    <div class="position--latLng"><b>Lng: </b> <i>{marker.position.lng().toString()}</i></div>
+    <!-- <div class="position--latLng"><b>Lat: </b> <i>{marker.position.lat().toString()}</i></div>
+    <div class="position--latLng"><b>Lng: </b> <i>{marker.position.lng().toString()}</i></div> -->
   </div>
 
 </li>
