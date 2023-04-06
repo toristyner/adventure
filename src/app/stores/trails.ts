@@ -16,7 +16,7 @@ const trails: AllTrails = {
 			}
 		],
 		segments: ['segment-a'],
-		markers: ['marker-a', 'marker-b'],
+		markers: ['marker-a', 'marker-b', 'marker-c', 'marker-d', 'marker-e'],
 		overview: {
 			center: { lat: 39.7972686, lng: -77.5403369 },
 			zoom: 6
