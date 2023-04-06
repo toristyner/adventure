@@ -5,34 +5,28 @@
 
 	export let marker: TrailMarker;
 
+	const onChangeMarkerType = (e: Event) => {
+		const type = (e.target as HTMLSelectElement).value as MarkerType;
+		markerStore.updateMarker({
+			...marker,
+			type
+		});
+	};
 
-  const onChangeMarkerType = (e: Event) => {
-    const type = (e.target as HTMLSelectElement).value as MarkerType
-    markerStore.updateMarker({
-      ...marker,
-      type
-    })
-  }
-
-  const onChangeMarkerLabel = (e: Event) => {
-    const label = (e.target as HTMLInputElement).value
-    markerStore.updateMarker({
-      ...marker,
-      label
-    })
-  }
+	const onChangeMarkerLabel = (e: Event) => {
+		const label = (e.target as HTMLInputElement).value;
+		markerStore.updateMarker({
+			...marker,
+			label
+		});
+	};
 </script>
 
 <li class="markerListItem">
 	<div class="header">
 		<div>
 			<MarkerIcon type={marker.type} />
-			<input
-        type="text"
-        bind:value={marker.label}
-        class="name"
-        on:change={onChangeMarkerLabel}
-      />
+			<input type="text" bind:value={marker.label} class="name" on:change={onChangeMarkerLabel} />
 		</div>
 		<select bind:value={marker.type} on:change={onChangeMarkerType}>
 			{#each Object.values(MarkerType) as markerType}

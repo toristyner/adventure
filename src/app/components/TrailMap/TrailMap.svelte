@@ -19,7 +19,7 @@
 		visible: $selectedStore.includes(t.id)
 	}));
 
-	$: activeTrail = $trailStore[$activeTrailId]
+	$: activeTrail = $trailStore[$activeTrailId];
 	$: markers = Object.values($markerStore).filter((m) => m.trailId === $activeTrailId);
 
 	const newTrailMarker = (position: google.maps.LatLng) => {
@@ -64,11 +64,7 @@
 					/>
 				{/each}
 				{#each markers as { position, label }}
-					<GoogleMapMarker
-						{position}
-						{map}
-						{label}
-					/>
+					<GoogleMapMarker {position} {map} {label} />
 				{/each}
 			{/each}
 		</div>

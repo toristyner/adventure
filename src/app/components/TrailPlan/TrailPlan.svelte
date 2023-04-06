@@ -10,28 +10,26 @@
 </script>
 
 <div class="trailPlan">
-  
-  <h1>Plan Your Hike</h1>
+	<h1>Plan Your Hike</h1>
 
-  <h2>Trail</h2>
-  <select name="activeTrail" class="trailPlan__select" bind:value={$activeTrailId}>
-    <option value={TrailEnum.AT}>{$trailStore[TrailEnum.AT].name}</option>
-    <option value={TrailEnum.PCT}>{$trailStore[TrailEnum.PCT].name}</option>
-  </select>
+	<h2>Trail</h2>
+	<select name="activeTrail" class="trailPlan__select" bind:value={$activeTrailId}>
+		<option value={TrailEnum.AT}>{$trailStore[TrailEnum.AT].name}</option>
+		<option value={TrailEnum.PCT}>{$trailStore[TrailEnum.PCT].name}</option>
+	</select>
 
 	<SegmentList activeSegmentId={segmentId} segmentIds={trail.segments} />
-  
-  <h2>Map Markers</h2>
-  
-	<MarkerList />
 
+	<h2>Map Markers</h2>
+
+	<MarkerList />
 </div>
 
 <style>
 	.trailPlan {
 		padding: 1.2rem;
 		width: 30rem;
-    display: flex;
+		display: flex;
 		flex-direction: column;
 	}
 	.trailPlan__select {

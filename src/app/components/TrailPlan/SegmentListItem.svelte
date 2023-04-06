@@ -46,7 +46,7 @@
 			{/each}
 		</select>
 	</div>
-<!-- 
+	<!-- 
 	<div class="segment-direction">
 		<i class="segment-icon fa-regular fa-compass fa-xl" />
 		<select

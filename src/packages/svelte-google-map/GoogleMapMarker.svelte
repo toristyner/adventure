@@ -4,7 +4,7 @@
 	export let map: google.maps.Map;
 	export let position: google.maps.LatLng;
 	export let label = '';
-	export let icon: google.maps.Icon
+	export let icon: google.maps.Icon;
 
 	let marker: google.maps.Marker;
 
@@ -20,7 +20,7 @@
 		marker.addListener('click', onMarkerClick);
 
 		if (icon) {
-			marker.setIcon(icon)
+			marker.setIcon(icon);
 		}
 	});
 
